@@ -1,0 +1,291 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CompareMaster | Home</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&family=Sansita+Swashed:wght@700&display=swap" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'pc/styles.css' %}">
+  
+  <style>
+    :root {
+      --primary-color: #264653;
+      --secondary-color: #2a9d8f;
+      --accent-color: #e9c46a;
+    }
+  
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: #f8f9fa;
+    }
+  
+    .navbar {
+      background: linear-gradient(45deg, var(--primary-color), #1d3557);
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    }
+  
+    .navbar-brand {
+      font-family: 'Sansita Swashed', cursive;
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+    }
+  
+    .hero-section {
+      background: linear-gradient(rgba(38, 70, 83, 0.9), rgba(38, 70, 83, 0.8)),
+                  url('{% static "pc/background.jpg" %}');
+      background-size: cover;
+      background-position: center;
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+      margin-bottom: 5rem;
+    }
+  
+    .service-card {
+      background: white;
+      border-radius: 15px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start; /* Ensure content is aligned properly */
+      position: relative;
+      overflow: hidden;
+    }
+  
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start; /* Start aligning from the top */
+      padding: 15px;
+      margin-top: 15px; /* Remove extra margin above card body */
+    }
+  
+    .card-title {
+      text-align: center;
+      font-size: 1.9rem;
+      margin-bottom: 0.9rem; /* Ensure reduced spacing below the title */
+    }
+  
+    ul.list-unstyled {
+      margin: 0; /* Remove margin around the list */
+      padding: 35px; /* Remove padding inside the list */
+    }
+  
+    ul.list-unstyled li {
+      font-size: 1.2rem;
+      margin-bottom: 1rem; /* Reduced spacing between list items */
+    }
+  
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+  
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: 0.5s;
+    }
+  
+    .service-card:hover::before {
+      left: 100%;
+    }
+  
+    .service-icon {
+      font-size: 3.5rem;
+      color: var(--secondary-color);
+      transition: all 0.3s ease;
+    }
+  
+    .service-card:hover .service-icon {
+      color: var(--primary-color);
+      transform: rotate(360deg);
+    }
+  
+    .feature-badge {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: var(--accent-color);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+  
+    .nav-link {
+      position: relative;
+      transition: all 0.3s ease;
+    }
+  
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-color);
+      transition: width 0.3s ease;
+    }
+  
+    .nav-link:hover::after {
+      width: 100%;
+    }
+  </style>
+  
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'compare-master-mainpage' %}">
+        <i class="fas fa-balance-scale-left mr-2"></i>CompareMaster
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="{% url 'compare-master-plagiarism' %}">Plagiarism Checker</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="{% url 'compare' %}">Compare Documents</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="{% url 'compare-master-list' %}">List Compare</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="{% url 'compare_images' %}">Image Compare</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="hero-section">
+    <div class="text-center text-white">
+      <h1 class="display-4 mb-4" style="font-family: 'Sansita Swashed', cursive;">
+        Smart Comparison Solutions
+      </h1>
+      <p class="lead mb-4">Transform your workflow with our comparison tools</p>
+      <div class="bounce">
+        <i class="fas fa-arrow-down fa-2x"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      {% for service in services %}
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="service-card p-4 text-center shadow" onclick="location.href='{% url service.link %}';">
+          <div class="feature-badge">New</div>
+          <i class="{{ service.icon }} service-icon mb-4"></i>
+          <h4 class="mb-3">{{ service.title }}</h4>
+          <p class="text-muted">{{ service.description }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+
+    <div class="row mt-5">
+        <div class="col-md-6 mb-4">
+          <div class="card border-0 shadow-lg h-100 service-card" onclick="location.href='{% url 'compare-master-plagiarism' %}';">
+            <div class="card-body">
+              <h3 class="card-title">Plagiarism Checker</h3>
+              <ul class="list-unstyled">
+                <li><i class="fas fa-check-circle text-success mr-2"></i>Simple copy-pasting in the text area.</li>
+                <li><i class="fas fa-check-circle text-success mr-2"></i>Check results.</li>
+                <li><i class="fas fa-check-circle text-success mr-2"></i>Write on your own.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      
+        <div class="col-md-6 mb-4">
+          <div class="card border-0 shadow-lg h-100 service-card" onclick="location.href='{% url 'compare-master-list' %}';">
+            <div class="card-body">
+              <h3 class="card-title">List Compare</h3>
+              <ul class="list-unstyled">
+                <li><i class="fas fa-check-circle text-success mr-2"></i>Simple copy-pasting in the text area.</li>
+                <li><i class="fas fa-check-circle text-success mr-2"></i>Check results.</li>
+                <li><i class="fas fa-check-circle text-success mr-2"></i>Write on your own.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      
+        <!-- New Image Compare Card -->
+        <div class="col-md-6 mb-4">
+          <div class="card border-0 shadow-lg h-100 service-card" onclick="location.href='{% url 'compare_images' %}';">
+            <div class="card-body">
+              <h3 class="card-title">Image Compare</h3>
+              <ul class="list-unstyled">
+                <li><i class="fas fa-check-circle text-success mr-2"></i>Upload and compare images.</li>
+                <li><i class="fas fa-check-circle text-success mr-2"></i>Detect differences.</li>
+                <li><i class="fas fa-check-circle text-success mr-2"></i>Get visual results.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      
+        <!-- New Documents Compare Card -->
+        <div class="col-md-6 mb-4">
+          <div class="card border-0 shadow-lg h-100 service-card" onclick="location.href='{% url 'compare' %}';">
+            <div class="card-body">
+              <h3 class="card-title">Documents Compare</h3>
+              <ul class="list-unstyled">
+                <li><i class="fas fa-check-circle text-success mr-2"></i>Upload documents in various formats.</li>
+                <li><i class="fas fa-check-circle text-success mr-2"></i>Compare text and formatting.</li>
+                <li><i class="fas fa-check-circle text-success mr-2"></i>Download detailed reports.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+  </div>
+
+  <script>
+    // Animation on scroll
+    const animateOnScroll = () => {
+      const elements = document.querySelectorAll('.animate-on-scroll');
+      elements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= window.innerHeight) {
+          el.classList.add('visible');
+        }
+      });
+    };
+
+    document.addEventListener('scroll', animateOnScroll);
+    document.addEventListener('DOMContentLoaded', animateOnScroll);
+  </script>
+</body>
+
+</html>
